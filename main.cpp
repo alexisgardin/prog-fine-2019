@@ -38,10 +38,21 @@ BENCHMARK(BM_mutli);
 
 
 //BENCHMARK_MAIN();
-
+template<typename T, std::size_t N>
+void print_array(const T(&a)[N], std::ostream &o = std::cout) {
+    o << "{";
+    for (std::size_t i = 0; i < N - 1; ++i) {
+        o << a[i] << ", ";
+    }
+    o << a[N - 1] << "}\n";
+}
 
 int main() {
 
-    Tris::test();
-    Generator::randomList(0, 100, 5);
+    std::vector<int> random = Generator::randomList(0, 100, 5);
+    int arr[random.size()];
+    std::copy(random.begin(), random.end(), arr);
+    Tris::MergeSort(arr, 0, (int) random.size() - 1);
+    std::cout << arr << std::endl;
 }
+

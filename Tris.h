@@ -11,6 +11,34 @@ namespace Tris {
 
     using namespace std;
 
+    void selectionSort(int dizi[], int elemanSayisi) {
+        int i, j, enKucuk, temp;
+        for (i = 0; i < elemanSayisi - 1; i++) {
+            enKucuk = i;
+            for (j = i + 1; j < elemanSayisi; j++) {
+                if (dizi[j] < dizi[enKucuk])
+                    enKucuk = j;
+            }
+            temp = dizi[i];
+            dizi[i] = dizi[enKucuk];
+            dizi[enKucuk] = temp;
+        }
+    }
+
+//Insertion sort function
+    void insertionSort(int dizi[], int elemanSayisi) {
+        int i, j, temp;
+        for (i = 1; i < elemanSayisi; i++) {
+            j = i;
+            while (j > 0 && dizi[j - 1] > dizi[j]) {
+                temp = dizi[j];
+                dizi[j] = dizi[j - 1];
+                dizi[j - 1] = temp;
+                j--;
+            }
+        }
+    }
+
     int Merge(int A[], int p, int q, int r) {
 
         int n1, n2, i, j, k;
