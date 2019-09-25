@@ -1,6 +1,8 @@
 #include <benchmark/benchmark.h>
 #include <iostream>
 #include <ctime>
+#include "Tris.h"
+#include "Generator.h"
 
 
 static void BM_addition(benchmark::State &state) {
@@ -35,20 +37,11 @@ BENCHMARK(BM_addition_2);
 BENCHMARK(BM_mutli);
 
 
-BENCHMARK_MAIN();
+//BENCHMARK_MAIN();
 
-/**
+
 int main() {
-    unsigned long x = 0;
-    auto start = std::chrono::high_resolution_clock::now();
-    for (unsigned long i = 0; i < 1000000; i++) {
-        x += i;
-    }
 
-    auto end = std::chrono::high_resolution_clock::now();
-    auto elapsed_seconds =
-            std::chrono::duration_cast<std::chrono::duration<double, std::nano>>(
-                    end - start);
-    std::cout << elapsed_seconds.count() / 1000000 << std::endl;
-    std::cout << x << std::endl;
-}**/
+    Tris::test();
+    Generator::randomList(0, 100, 5);
+}
