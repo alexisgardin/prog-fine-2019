@@ -92,6 +92,10 @@ namespace Tris {
             Merge(A, p, q, r);
         }
     }
+
+    void launchMerge(int A[], int size) {
+        MergeSort(A, 0, (int) size - 1);
+    }
 }
 
 
