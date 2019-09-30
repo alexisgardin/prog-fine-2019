@@ -10,6 +10,6 @@ find_package(Boost 1.7.0)
 
 if (Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
-    add_executable(ProgFine main.cpp Tris.h Generator.h)
+    add_executable(ProgFine main.cpp Tris.h Generator.h Benchmark.cpp Benchmark.h)
     target_link_libraries(ProgFine PRIVATE benchmark benchmark ${Boost_LIBRARIES})
 endif ()

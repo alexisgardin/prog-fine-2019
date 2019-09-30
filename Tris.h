@@ -20,7 +20,7 @@
  */
 
 struct myclass {
-    bool operator() (int i,int j) { return (i<j);}
+    bool operator()(int i, int j) { return (i < j); }
 } myobject;
 
 namespace Tris {
@@ -77,7 +77,9 @@ namespace Tris {
         //size of right array=n2
         n1 = q - p + 1;
         n2 = r - q;
-        int L[n1], R[n2];
+
+        int *L = new int[n1];
+        int *R = new int[n2];
         //initializing the value of Left part to L[]
         for (i = 0; i < n1; i++) {
             L[i] = A[p + i];
@@ -108,6 +110,9 @@ namespace Tris {
         while (j < n2) {
             A[k++] = R[j++];
         }
+
+        delete[] L;
+        delete[] R;
     }
 
     //This is Divide Part
@@ -124,7 +129,7 @@ namespace Tris {
         }
     }
 
-    void mergeSort(int *tab, int N) {
+    void mergeSort(int tab[], int N) {
         MergeSort(tab, 0, N - 1);
     }
 
