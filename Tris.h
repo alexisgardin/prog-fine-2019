@@ -6,6 +6,8 @@
 #define PROGFINE_TRIS_H
 
 #include <iostream>
+#include <vector>
+#include <functional>
 
 /**
  * Sorts to implement:

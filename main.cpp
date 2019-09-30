@@ -1,6 +1,5 @@
-#include <benchmark/benchmark.h>
+
 #include <iostream>
-#include <ctime>
 #include "Tris.h"
 #include "Generator.h"
 #include <functional>
