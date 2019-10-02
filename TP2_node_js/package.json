@@ -2,10 +2,18 @@
   "name": "tp2_node_js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "start": "ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "GARDIN & FERRE",
+  "license": "ISC",
+  "dependencies": {
+    "datastructures-js": "^6.0.2",
+    "immutable": "^4.0.0-rc.12"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.3",
+    "ts-node": "^8.4.1"
+  }
 }
