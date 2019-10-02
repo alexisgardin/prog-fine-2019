@@ -1,4 +1,4 @@
-import BenchDataStructure from "./BenchDataStructure";
+import BenchDataStructure from "../structures/BenchDataStructure";
 
 class Benchmark {
 
@@ -8,7 +8,7 @@ class Benchmark {
         this.ds = dataStructure;
     }
 
-    run() {
+    benchInsertion(insertFunc: (value: number) => void) {
 
     }
 

@@ -1,5 +1,5 @@
 import Stack from "./structures/Stack";
-import BenchDataStructure from "./BenchDataStructure";
+import BenchDataStructure from "./structures/BenchDataStructure";
 
 const main = () => {
     const stack: BenchDataStructure<number> = new Stack();

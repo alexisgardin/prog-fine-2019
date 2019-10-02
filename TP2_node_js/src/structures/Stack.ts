@@ -1,21 +1,20 @@
-import BenchDataStructure from "../BenchDataStructure";
+import BenchDataStructure from "./BenchDataStructure";
+import {stack} from "datastructures-js";
 
 class Stack<T> extends BenchDataStructure<T> {
+
+    stack: stack;
 
     constructor() {
         super('Stack', false);
     }
 
     insert(value: T) {
-        super.insert(value);
+        this.stack.push(value);
     }
 
     pop(): T {
-        return super.pop();
-    }
-
-    search(value: T): T {
-        return value;
+        return this.stack.pop();
     }
 }
 

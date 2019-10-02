@@ -9,15 +9,15 @@ abstract class BenchDataStructure<T> {
     }
 
     insert(value: T): void {
-        // Void
+        throw new Error('Not implemented');
     }
 
     pop(): T {
-        return null;
+        throw new Error('Not implemented');
     }
 
     search(value: T): T {
-        return value;
+        throw new Error('Not implemented');
     }
 }
 
