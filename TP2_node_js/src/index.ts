@@ -1,5 +1,5 @@
 import Stack from "./structures/Stack";
-import BenchDataStructure from "./BenchDataStructure";
+import BenchDataStructure from "./structures/BenchDataStructure";
 import {AVLNil, AVLNode, AvlTree} from "./AVL/AvlTree";
 
 const main = () => {
