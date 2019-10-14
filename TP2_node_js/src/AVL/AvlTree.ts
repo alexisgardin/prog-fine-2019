@@ -25,9 +25,16 @@ export abstract class AvlTree {
 
     public abstract index(element: number): number;
 
+    public abstract isLeaf() : boolean;
+
     public display(indent: string): string {
         return this.display("");
     }
+
+
+    public abstract count();
+
+    public abstract name();
 
 }
 
@@ -69,7 +76,24 @@ export class AVLNil extends AvlTree {
     public display(indent: string): string {
         return indent + "$\n";
     };
+    public isLeaf() : boolean{
+        return true;
+    }
 
+    public count() : number {
+        let sum = 0;
+        if(this.left !== null){
+            sum+=this.left.count();
+        }
+        if(this.right !== null){
+            sum+=this.right.count();
+        }
+        return sum+1;
+}
+
+    name() {
+        return "AVL NIL";
+    }
 }
 
 export class AVLNode extends AvlTree {
@@ -154,5 +178,17 @@ export class AVLNode extends AvlTree {
         return this.left.display(indent1)
             + indent + this.element + "\n"
             + this.right.display(indent1);
+    }
+
+    public isLeaf() : boolean{
+        return false;
+    }
+
+    public count() : number {
+        return 1;
+    }
+
+    name() {
+        return "AVL NODE";
     }
 }
