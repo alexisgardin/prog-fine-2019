@@ -32,6 +32,21 @@ export abstract class AvlTree {
     }
 
 
+    public diff(){
+        let x = 0;
+         let a : AvlTree = this;
+        while (a.left !== null){
+            x++;
+            a =  a.left;
+        }
+         a  = this;
+        while (a.right !== null){
+            x--;
+            a =  a.right;
+        }
+
+        return x;
+    }
     public abstract count();
 
     public abstract name();

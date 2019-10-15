@@ -10,18 +10,36 @@ const main = () => {
 
 
     console.log("\n################ TEST AVL TREE ################");
+    try {
+        for (let i = 0; i < 100; i++) {
+            let avl : AvlTree = new AVLNil();
 
-    let avl : AvlTree = new AVLNil();
+            for (let j = 0; j < getRandomInt(100); j++) {
+                avl = avl.add(j);
+            }
+            let result = avl.diff();
+            if(result!== 0 && result!==-1)
+                throw {"state":"error","expected": '0 or -1', "actual":result}
+        }
 
-    for (let i = 0; i < 10000; i++) {
-        avl = avl.add(i);
+
+        let avl : AvlTree = new AVLNil();
+        for (let j = 0; j < 100; j++) {
+            avl = avl.add(j);
+        }
+        for (let i = 0; i < 100; i++) {
+            avl = avl.remove(i);
+        }
+        if(!("$\n"==avl.display(""))) //If the print function are empty then we have nothing to print so all data are remove
+        {
+            throw {"state":"error","expected": 'EMPTY AVL'}
+        }
+        console.log("OK")
+    }catch (e) {
+        console.log(e)
     }
-    avl.display("  ")
-    console.log("AVL COUNT : ",avl.right.count(), avl.left.count());
 
-    for (let i = 0; i < 10000; i++) {
-        avl = avl.remove(i);
-    }
+
 
     console.log("\n################ TEST BINARY HEAP ################");
     try {
