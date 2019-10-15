@@ -8,11 +8,11 @@ abstract class BenchDataStructure<T> {
         this.mutable = mutable;
     }
 
-    insert(value: T): void {
+    insert(value: T, index?: number): void {
         throw new Error('Not implemented');
     }
 
-    pop(): T {
+    pop(value?: T): T {
         throw new Error('Not implemented');
     }
 

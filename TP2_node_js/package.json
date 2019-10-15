@@ -4,13 +4,17 @@
   "description": "",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "build": "tsc -p tsconfig.json",
     "test": "ts-node src/test.ts"
   },
   "author": "GARDIN & FERRE",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^12.7.12",
+    "@tyriar/avl-tree": "^2.0.6",
     "datastructures-js": "^6.0.2",
-    "immutable": "^4.0.0-rc.12"
+    "immutable": "^4.0.0-rc.12",
+    "immutable-queue": "^2.0.0"
   },
   "devDependencies": {
     "typescript": "^3.6.3",
