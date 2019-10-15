@@ -27,6 +27,19 @@ export abstract class AvlTree {
 
     public abstract isLeaf() : boolean;
 
+    public find(value: number) {
+        let currentNode : AvlTree = this;
+        while (currentNode !== null) {
+            if (value > currentNode.element) {
+                currentNode = currentNode.right;
+            } else if (value < currentNode.element) {
+                currentNode = currentNode.left;
+            } else {
+                return currentNode;
+            }
+        }
+        return null;
+    };
     public display(indent: string): string {
         return this.display("");
     }
@@ -155,7 +168,12 @@ export class AVLNode extends AvlTree {
     }
 
     index(element: number): number {
-        return 0;
+        if (compareTo(element, this.element) <= 0) {
+            return this.left.index(element);
+        }
+        else {
+            return this.left.size+1+this.right.index(element);
+        }
     }
 
     pollFirst(): Pair {

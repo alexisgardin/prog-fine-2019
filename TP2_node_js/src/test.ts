@@ -34,6 +34,19 @@ const main = () => {
         {
             throw {"state":"error","expected": 'EMPTY AVL'}
         }
+
+        avl  = new AVLNil();
+        for (let j = 0; j < 100; j++) {
+            const test= getRandomInt(100);
+            avl = avl.add(test);
+            if(avl.find(test) === null){
+                throw {"state":"error","expected": 'ERROR IN FIND'}
+            }
+        }
+
+        if(avl.find(100000) !== null){
+            throw {"state":"error","expected": 'HE FOUND SOMETHING THAT DOESNT EXIST'}
+        }
         console.log("OK")
     }catch (e) {
         console.log(e)
