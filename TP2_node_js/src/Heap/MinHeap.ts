@@ -95,14 +95,11 @@ export default class Heap {
 
 
     private swap(fpos: number, spos: number) {
-        this.data = this.data.map(
-            (element, index) =>
-                index === fpos
-                    ? this.data[spos]
-                    : index === spos
-                    ? this.data[fpos]
-                    : element
-        )
+        let newArr = [...this.data];
+        let temp = this.data[spos];
+        newArr[spos] = newArr[fpos];
+        newArr[fpos] = temp;
+        this.data = newArr;
     }
 
     /**
