@@ -1,6 +1,7 @@
-
-import {AVLNil, AVLNode, AvlTree} from "./structures/custom/AVL/AvlTree";
+import {AVLNil, AvlTree} from "./structures/custom/AVL/AvlTree";
 import MinHeap from "./structures/custom/Heap/MinHeap";
+
+
 
 function getRandomInt(max) : number{
     return Math.floor(Math.random() * Math.floor(max));
@@ -58,14 +59,14 @@ const main = () => {
     try {
         let sortedList = [];
         const heap = new MinHeap();
-        for (let i = 0; i <100000; i++) {
+        for (let i = 0; i <1000; i++) {
             const random = getRandomInt(100);
             heap.add(random);
             sortedList.push(random);
         }
         sortedList.sort(((a, b) => a<b?-1:b<a? 1 : 0));
         //console.log(sortedList);
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 1000; i++) {
             const val = heap.removeRoot();
             if(val != sortedList[i]){
                 throw {"state":"error","expected": sortedList[i], "actual":val}
