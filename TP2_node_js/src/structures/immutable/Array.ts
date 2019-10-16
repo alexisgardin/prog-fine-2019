@@ -1,23 +1,21 @@
 import BenchDataStructure from "../BenchDataStructure";
-import { List } from "immutable";
+import { List } from "../custom/List/List";
 
 class ImmutableArray<T> extends BenchDataStructure<T> {
 
-    array: List<T>;
+    array: List;
 
     constructor() {
         super('ARRAY', false);
-        this.array = List<T>();
+        this.array = new List();
     }
 
-    public insert(value: T, index?: number) {
+    public insert(value: any, index?: number) {
         this.array = this.array.set(index, value);
     }
 
-    public pop(value?: any): T {
-        const v = this.array.get(value);
-        this.array = this.array.remove(value);
-        return v;
+    public pop(value?: any): any {
+        return this.array.get(value);
     }
 
     public search = null;

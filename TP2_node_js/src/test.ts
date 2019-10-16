@@ -1,6 +1,6 @@
 
-import {AVLNil, AVLNode, AvlTree} from "./AVL/AvlTree";
-import MinHeap from "./Heap/MinHeap";
+import {AVLNil, AVLNode, AvlTree} from "./structures/custom/AVL/AvlTree";
+import MinHeap from "./structures/custom/Heap/MinHeap";
 
 function getRandomInt(max) : number{
     return Math.floor(Math.random() * Math.floor(max));
