@@ -5,6 +5,7 @@ FIND_PACKAGE(Boost 1.7.0 COMPONENTS string_algo)
 set(Boost_USE_STATIC_LIBS ON) # only find static libs
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
+set(CMAKE_CXX_STANDARD 11)
 # include files
 include_directories(./include ./src)
 

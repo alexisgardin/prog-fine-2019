@@ -9,6 +9,6 @@ using namespace std;
 
 int main() //Driver Function for Dijkstra SSSP
 {
-    AlgorithmTabu a("../files/DG20.txt");
+    AlgorithmTabu a("../files/sample.txt");
     a.run();
 }

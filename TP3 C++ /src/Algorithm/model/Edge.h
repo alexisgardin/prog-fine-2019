@@ -11,9 +11,11 @@
 class Edge {
 public:
     std::shared_ptr<Node> src, dest;
-    int distance;
 
     Edge(std::shared_ptr<Node> src, std::shared_ptr<Node> dest);
+
+    int distance();
+
 };
 
 

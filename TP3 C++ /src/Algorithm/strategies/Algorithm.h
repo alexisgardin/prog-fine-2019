@@ -22,6 +22,13 @@ public:
 
     virtual void run() = 0;
 
+    int score();
+
+    int scoreCoordinate();
+
+    int scoreDistance();
+
+    void displayMatrice();
 };
 
 

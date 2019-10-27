@@ -5,3 +5,7 @@
 #include "Edge.h"
 
 Edge::Edge(std::shared_ptr<Node> src, std::shared_ptr<Node> dest) : src(src), dest(dest) {}
+
+int Edge::distance() {
+    return std::abs(dest->x - src->x) + std::abs(dest->y - src->y);
+}
