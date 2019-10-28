@@ -12,7 +12,11 @@ class AlgorithmTabu : public Algorithm {
 public:
     AlgorithmTabu(const std::string &file);
 
-    void run() override;
+    int tabuTime = 0;
+
+    int run() override;
+
+    void computeTabu();
 };
 
 

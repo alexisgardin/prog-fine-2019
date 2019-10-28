@@ -20,7 +20,7 @@ protected:
 public:
     Algorithm(std::string file);
 
-    virtual void run() = 0;
+    virtual int run() = 0;
 
     int score();
 
@@ -29,6 +29,8 @@ public:
     int scoreDistance();
 
     void displayMatrice();
+
+    void displayMatriceWithValue();
 };
 
 

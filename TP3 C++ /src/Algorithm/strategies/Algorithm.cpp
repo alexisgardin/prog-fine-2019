@@ -55,8 +55,12 @@ int Algorithm::score() {
 }
 
 int Algorithm::scoreCoordinate() {
+    int maxX = 0;
+    int maxY = 0;
     std::unordered_map<std::string, int> mapCoord;
     for (std::shared_ptr<Node> node : g.nodes) {
+        maxX = std::max(maxX, node->x);
+        maxY = std::max(maxY, node->y);
         std::string pair = std::to_string(node->x) + "-" + std::to_string(node->y);
         if (mapCoord.find(pair) == mapCoord.end()) {
             mapCoord.insert({pair, 1});
@@ -68,7 +72,8 @@ int Algorithm::scoreCoordinate() {
     for (std::pair<std::string, int> value : mapCoord) {
         score += 3 * std::pow(value.second - 1, 2);
     }
-    return score;
+    int max = std::max(maxX, maxY);
+    return score + (max * max);
 }
 
 
@@ -77,12 +82,14 @@ int Algorithm::scoreDistance() {
 
     for (const std::shared_ptr<Edge> &edge : g.edges) {
         score += 2 * std::pow(edge->distance() - 1, 2);
+        if (edge->src->x == edge->dest->x && edge->dest->y == edge->src->y)
+            score = +99999;
     }
     return score;
 }
 
 void Algorithm::displayMatrice() {
-    matrix<int> m(std::sqrt(g.nodes.size()) + 1, std::sqrt(g.nodes.size()) + 1, 0);
+    matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
 
     for (std::shared_ptr<Node> node : g.nodes) {
         std::cout << node->x << ", " << node->y << std::endl;
@@ -98,3 +105,20 @@ void Algorithm::displayMatrice() {
     }
 }
 
+
+void Algorithm::displayMatriceWithValue() {
+    matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
+
+    for (std::shared_ptr<Node> node : g.nodes) {
+        std::cout << node->x << ", " << node->y << std::endl;
+        m(node->x, node->y) = node->value;
+    }
+
+    for (unsigned i = 0; i < m.size1(); ++i) {
+        std::cout << "| ";
+        for (unsigned j = 0; j < m.size2(); ++j) {
+            std::cout << m(i, j) << " | ";
+        }
+        std::cout << "|" << std::endl;
+    }
+}
