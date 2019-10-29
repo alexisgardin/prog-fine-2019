@@ -36,10 +36,10 @@ Graph::Graph(unsigned int n, std::vector<std::shared_ptr<Edge>> edges,
     // add edges to the directed graph
     for (const std::shared_ptr<Edge> &edge: this->edges) {
         // insert at the end
-        adjList[edge->src->value].push_back(edge->dest);
+        adjList[edge->src->value].insert(edge->dest);
 
         // Uncomment below line for undirected graph
-        adjList[edge->dest->value].push_back(edge->src);
+        adjList[edge->dest->value].insert(edge->src);
     }
 
 }

@@ -6,7 +6,7 @@
 #define GRAPH_GRAPH_H
 
 #include <vector>
-#include <unordered_map>
+#include <unordered_set>
 #include "Edge.h"
 #include "Node.h"
 
@@ -14,7 +14,7 @@ class Graph {
 public:
     unsigned int N;
     std::vector<std::shared_ptr<Edge>> edges;
-    std::vector<std::vector<std::shared_ptr<Node>>> adjList;
+    std::vector<std::unordered_set<std::shared_ptr<Node>>> adjList;
     std::vector<std::shared_ptr<Node>> nodes;
 
 

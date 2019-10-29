@@ -88,10 +88,33 @@ int Algorithm::scoreDistance() {
     return score;
 }
 
-void Algorithm::displayMatrice() {
-    matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
+void movedAllPointsToPositive(std::vector<std::shared_ptr<Node>> list);
 
-    for (std::shared_ptr<Node> node : g.nodes) {
+void movedAllPointsToPositive(std::vector<std::shared_ptr<Node>> list) {
+    int minX = 999999, minY = 999999;
+
+    for (auto &node : list) {
+        if (node->x < minX) {
+            minX = node->x;
+        }
+
+        if (node->y < minY) {
+            minY = node->y;
+        }
+    }
+
+    int x = std::abs(minX), y = std::abs(minY);
+    for (auto &node : list) {
+        node->x += x;
+        node->y += y;
+    }
+}
+
+void Algorithm::displayMatrice() {
+    // matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
+    matrix<int> m(g.nodes.size(), g.nodes.size(), 0);
+
+    for (const std::shared_ptr<Node>& node : g.nodes) {
         std::cout << node->x << ", " << node->y << std::endl;
         m(node->x, node->y) += 1;
     }
@@ -107,7 +130,9 @@ void Algorithm::displayMatrice() {
 
 
 void Algorithm::displayMatriceWithValue() {
-    matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
+    movedAllPointsToPositive(g.nodes);
+    //matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
+    matrix<int> m(g.nodes.size(), g.nodes.size(), 0);
 
     for (std::shared_ptr<Node> node : g.nodes) {
         std::cout << node->x << ", " << node->y << std::endl;

@@ -3,6 +3,7 @@
 //
 
 #include <random>
+#include <unordered_map>
 #include "AlgorithmTabu.h"
 
 AlgorithmTabu::AlgorithmTabu(const std::string &file) : Algorithm(file) {}
