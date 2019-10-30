@@ -39,9 +39,10 @@ int AlgorithmGreedy::run() {
 
 void AlgorithmGreedy::evaluateNode(const std::shared_ptr<Node> &node) {
     // Node already placed here
-    this->evaluatedNodes.insert(node);
+    this->evaluatedNodes.insert(this->evaluatedNodes.end(), node);
 
     bool jump = false;
+    std::vector<std::shared_ptr<Node>> nodesToPlace;
     for (const auto &n : this->g.adjList[node->value]) {
         if (n->hasCoordinates()) continue;
 
@@ -70,10 +71,14 @@ void AlgorithmGreedy::evaluateNode(const std::shared_ptr<Node> &node) {
         if (!jump) {
             // Second case : no square found in second level
             // Need to place n correctly
-            this->placeOne(node, n);
+            nodesToPlace.emplace_back(n);
         }
 
         jump = false;
+    }
+
+    for (const auto &n : nodesToPlace) {
+        this->placeOne(node, n);
     }
 
     for (const auto &n : this->g.adjList[node->value]) {
@@ -139,26 +144,6 @@ void AlgorithmGreedy::placeOne(const std::shared_ptr<Node> &current, const std::
     bool eastAvailable = this->usedCoordinates.find(east) == this->usedCoordinates.end();
     bool southAvailable = this->usedCoordinates.find(south) == this->usedCoordinates.end();
     bool westAvailable = this->usedCoordinates.find(west) == this->usedCoordinates.end();
-
-    if (northAvailable && eastAvailable && southAvailable && westAvailable) {
-        srand((unsigned int) time(0));
-        int value = rand() % 4 + 1;
-
-        switch (value) {
-            case 1:
-                this->setCoordinates(toPlace, curX, curY + 1);
-                return;
-            case 2:
-                this->setCoordinates(toPlace, curX + 1, curY);
-                return;
-            case 3:
-                this->setCoordinates(toPlace, curX, curY - 1);
-                return;
-            case 4:
-                this->setCoordinates(toPlace, curX - 1, curY);
-                return;
-        }
-    }
 
     std::vector<std::pair<double, std::pair<bool, std::pair<int, int>>>> toEvaluate;
     toEvaluate.emplace_back(std::pair<double, std::pair<bool, std::pair<int, int>>>(distance(0, 0, curX, curY + 1),
@@ -377,11 +362,11 @@ void AlgorithmGreedy::setCoordinates(const std::shared_ptr<Node> &node, const in
     auto it = this->usedCoordinates.find(str);
     if (it == this->usedCoordinates.end()) {
         std::unordered_set<std::shared_ptr<Node>> set;
-        set.insert(node);
+        set.insert(set.end(), node);
         this->usedCoordinates.emplace(str, set);
     } else {
         auto tuple = *it;
-        it->second.insert(node);
+        it->second.insert(it->second.end(), node);
     }
 }
 
