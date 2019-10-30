@@ -27,7 +27,7 @@ link_directories(${Boost_LIBRARY_DIR})
 # Unit Tests
 ################################
 # Add test cpp file
-add_executable(Graph ./src/main.cpp src/Algorithm/strategies/Algorithm.cpp src/Algorithm/strategies/Algorithm.h src/Algorithm/model/Edge.cpp src/Algorithm/model/Edge.h src/Algorithm/model/Graph.cpp src/Algorithm/model/Graph.h src/Algorithm/model/Node.cpp src/Algorithm/model/Node.h src/Algorithm/strategies/AlgorithmTabu.cpp src/Algorithm/strategies/AlgorithmTabu.h src/Algorithm/strategies/AlgorithmGreedy.cpp src/Algorithm/strategies/AlgorithmGreedy.h)
+add_executable(Graph ./src/main.cpp src/Algorithm/strategies/Algorithm.cpp src/Algorithm/strategies/Algorithm.h src/Algorithm/model/Edge.cpp src/Algorithm/model/Edge.h src/Algorithm/model/Graph.cpp src/Algorithm/model/Graph.h src/Algorithm/model/Node.cpp src/Algorithm/model/Node.h src/Algorithm/strategies/AlgorithmTabu.cpp src/Algorithm/strategies/AlgorithmTabu.h src/Algorithm/strategies/AlgorithmGreedy.cpp src/Algorithm/strategies/AlgorithmGreedy.h src/Algorithm/strategies/AlgorithmQuadra.cpp src/Algorithm/strategies/AlgorithmQuadra.h)
 
 # Link test executable against gtest & gtest_main
 target_link_libraries(Graph ${Boost_LIBRARIES})

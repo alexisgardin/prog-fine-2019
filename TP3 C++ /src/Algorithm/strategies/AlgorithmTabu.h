@@ -16,6 +16,9 @@ public:
 
     int run() override;
 
+    int algo_1();
+
+
     void computeTabu();
 };
 

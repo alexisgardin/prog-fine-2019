@@ -17,12 +17,24 @@ std::string keyGenerator(int value, int x, int y) {
 }
 
 int AlgorithmTabu::run() {
+    computeTabu();
+    return algo_1();
+}
+
+void AlgorithmTabu::computeTabu() {
+    //this->tabuTime = 100;
+    this->tabuTime = std::max(std::ceil(std::sqrt(g.edges.size())), std::ceil(std::sqrt(g.nodes.size())));
+
+}
+
+int AlgorithmTabu::algo_1() {
+    int sameCounter = 0;
     std::unordered_map<std::string, int> tabu;
     int bestScore = 0;
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<int> distrib{0, (int) std::ceil(std::sqrt(g.nodes.size()))};
-    std::cout << "TABU" << std::endl;
-    g.printGraph();
+    //std::cout << "TABU" << std::endl;
+    //g.printGraph();
 
     std::for_each(g.nodes.begin(), g.nodes.end(), [&](std::shared_ptr<Node> &node) {
         node->x = distrib(re);
@@ -49,10 +61,17 @@ int AlgorithmTabu::run() {
             tabu.insert({key2, this->tabuTime});
             int s = score();
             if (s > bestScore) {
-                node->x = tempx;
-                node->y = tempy;
+                sameCounter++;
+                if (sameCounter != ITERATION_NUMBER / std::max(std::ceil(std::sqrt(g.edges.size())),
+                                                               std::ceil(std::sqrt(g.nodes.size())))) {
+                    node->x = tempx;
+                    node->y = tempy;
+                } else {
+                    sameCounter = 0;
+                }
             } else {
                 bestScore = s;
+                sameCounter = 0;
             }
         });
 
@@ -69,14 +88,9 @@ int AlgorithmTabu::run() {
             tabu.erase(toRemove);
         }
     }
-    std::cout << "RESULTAT : " << score() << std::endl;
-    displayMatrice();
-    displayMatriceWithValue();
+    //std::cout << "RESULTAT : " << score() << std::endl;
+    //displayMatrice();
+    //displayMatriceWithValue();
     return bestScore;
 }
 
-void AlgorithmTabu::computeTabu() {
-    // this->tabuTime = 3;
-    this->tabuTime = std::ceil(std::sqrt(g.edges.size()));
-
-}

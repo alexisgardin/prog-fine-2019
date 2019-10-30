@@ -31,6 +31,10 @@ public:
     void displayMatrice();
 
     void displayMatriceWithValue();
+
+    void output();
+
+    void movedAllPointsToPositive();
 };
 
 

@@ -57,10 +57,14 @@ int Algorithm::score() {
 int Algorithm::scoreCoordinate() {
     int maxX = 0;
     int maxY = 0;
+    int minX = 0;
+    int minY = 0;
     std::unordered_map<std::string, int> mapCoord;
     for (std::shared_ptr<Node> node : g.nodes) {
         maxX = std::max(maxX, node->x);
         maxY = std::max(maxY, node->y);
+        minX = std::min(minX, node->x);
+        minY = std::min(minY, node->y);
         std::string pair = std::to_string(node->x) + "-" + std::to_string(node->y);
         if (mapCoord.find(pair) == mapCoord.end()) {
             mapCoord.insert({pair, 1});
@@ -72,6 +76,9 @@ int Algorithm::scoreCoordinate() {
     for (std::pair<std::string, int> value : mapCoord) {
         score += 3 * std::pow(value.second - 1, 2);
     }
+
+    maxX = std::abs(minX) + maxX;
+    maxY = std::abs(minY) + maxY;
     int max = std::max(maxX, maxY);
     return score + (max * max);
 }
@@ -88,12 +95,11 @@ int Algorithm::scoreDistance() {
     return score;
 }
 
-void movedAllPointsToPositive(std::vector<std::shared_ptr<Node>> list);
 
-void movedAllPointsToPositive(std::vector<std::shared_ptr<Node>> list) {
+void Algorithm::movedAllPointsToPositive() {
     int minX = 999999, minY = 999999;
 
-    for (auto &node : list) {
+    for (auto &node : g.nodes) {
         if (node->x < minX) {
             minX = node->x;
         }
@@ -104,7 +110,7 @@ void movedAllPointsToPositive(std::vector<std::shared_ptr<Node>> list) {
     }
 
     int x = std::abs(minX), y = std::abs(minY);
-    for (auto &node : list) {
+    for (auto &node : g.nodes) {
         node->x += x;
         node->y += y;
     }
@@ -114,8 +120,8 @@ void Algorithm::displayMatrice() {
     // matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
     matrix<int> m(g.nodes.size(), g.nodes.size(), 0);
 
-    for (const std::shared_ptr<Node>& node : g.nodes) {
-        std::cout << node->x << ", " << node->y << std::endl;
+    for (const std::shared_ptr<Node> &node : g.nodes) {
+        //std::cout << node->x << ", " << node->y << std::endl;
         m(node->x, node->y) += 1;
     }
 
@@ -130,12 +136,12 @@ void Algorithm::displayMatrice() {
 
 
 void Algorithm::displayMatriceWithValue() {
-    movedAllPointsToPositive(g.nodes);
+    movedAllPointsToPositive();
     //matrix<int> m(std::ceil(std::sqrt(g.nodes.size())) + 1, std::ceil(std::sqrt(g.nodes.size())) + 1, 0);
     matrix<int> m(g.nodes.size(), g.nodes.size(), 0);
 
-    for (std::shared_ptr<Node> node : g.nodes) {
-        std::cout << node->x << ", " << node->y << std::endl;
+    for (std::shared_ptr<Node> &node : g.nodes) {
+        // std::cout << node->x << ", " << node->y << std::endl;
         m(node->x, node->y) = node->value;
     }
 
@@ -147,3 +153,14 @@ void Algorithm::displayMatriceWithValue() {
         std::cout << "|" << std::endl;
     }
 }
+
+void Algorithm::output() {
+    std::ofstream myfile;
+    myfile.open(file + ".output", std::ofstream::out | std::ofstream::trunc);
+    for (std::shared_ptr<Node> &node : g.nodes) {
+        myfile << node->x << " " << node->y << std::endl;
+    }
+    myfile.close();
+
+}
+
