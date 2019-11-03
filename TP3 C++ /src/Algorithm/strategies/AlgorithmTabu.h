@@ -14,7 +14,7 @@ public:
 
     int tabuTime = 0;
 
-    int run() override;
+    long run() override;
 
     int algo_1();
 

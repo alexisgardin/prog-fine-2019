@@ -12,7 +12,7 @@ class AlgorithmQuadra : public Algorithm {
 public:
     AlgorithmQuadra(const std::string &file);
 
-    int run() override;
+    long run() override;
 
 };
 

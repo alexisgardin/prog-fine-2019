@@ -14,19 +14,20 @@
 
 class Algorithm {
 protected:
-    Graph g;
     std::vector<std::pair<int, int>> arcs;
-    const std::string file;
+    std::string file;
 public:
+    Graph g;
+
     Algorithm(std::string file);
 
-    virtual int run() = 0;
+    virtual long run() = 0;
 
-    int score();
+    long score();
 
-    int scoreCoordinate();
+    long scoreCoordinate();
 
-    int scoreDistance();
+    long scoreDistance();
 
     void displayMatrice();
 

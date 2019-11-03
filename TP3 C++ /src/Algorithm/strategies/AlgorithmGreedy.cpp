@@ -14,7 +14,7 @@ double distance(int x1, int y1, int x2, int y2) {
 
 AlgorithmGreedy::AlgorithmGreedy(const std::string &file) : Algorithm(file) {}
 
-int AlgorithmGreedy::run() {
+long AlgorithmGreedy::run() {
 
     auto node = this->g.nodes[0];
     this->setCoordinates(node, 0, 0);
@@ -33,7 +33,6 @@ int AlgorithmGreedy::run() {
         }
     }
 
-    this->displayMatriceWithValue();
     return score();
 }
 

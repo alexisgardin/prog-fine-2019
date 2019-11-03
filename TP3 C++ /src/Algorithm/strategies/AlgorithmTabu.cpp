@@ -16,7 +16,7 @@ std::string keyGenerator(int value, int x, int y) {
     //return std::to_string(x) + "-" + std::to_string(y);
 }
 
-int AlgorithmTabu::run() {
+long AlgorithmTabu::run() {
     computeTabu();
     return algo_1();
 }
@@ -30,7 +30,7 @@ void AlgorithmTabu::computeTabu() {
 int AlgorithmTabu::algo_1() {
     int sameCounter = 0;
     std::unordered_map<std::string, int> tabu;
-    int bestScore = 0;
+    long bestScore = 0;
     std::default_random_engine re(std::chrono::system_clock::now().time_since_epoch().count());
     std::uniform_int_distribution<int> distrib{0, (int) std::ceil(std::sqrt(g.nodes.size()))};
     //std::cout << "TABU" << std::endl;
@@ -59,7 +59,7 @@ int AlgorithmTabu::algo_1() {
                 count++;
             } while (tabu.find(key2) != tabu.end());
             tabu.insert({key2, this->tabuTime});
-            int s = score();
+            long s = score();
             if (s > bestScore) {
                 sameCounter++;
                 if (sameCounter != ITERATION_NUMBER / std::max(std::ceil(std::sqrt(g.edges.size())),

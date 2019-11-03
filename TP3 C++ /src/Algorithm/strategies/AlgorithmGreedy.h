@@ -15,7 +15,7 @@ public:
 
     AlgorithmGreedy(const std::string &file);
 
-    int run() override;
+    long run() override;
 
     std::pair<int, int>
     findNearestCoordinates(const int curX, const int curY, const std::shared_ptr<Node> &nodeToPlace, bool isAvailable);

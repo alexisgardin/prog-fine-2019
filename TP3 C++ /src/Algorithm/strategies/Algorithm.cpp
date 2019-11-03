@@ -50,17 +50,17 @@ Algorithm::Algorithm(std::string file) : file(file) {
     g = Graph(nodesNumber, edges, nodes);
 }
 
-int Algorithm::score() {
+long Algorithm::score() {
     return scoreCoordinate() + scoreDistance();
 }
 
-int Algorithm::scoreCoordinate() {
+long Algorithm::scoreCoordinate() {
     int maxX = 0;
     int maxY = 0;
-    int minX = 0;
-    int minY = 0;
+    int minX = 999999;
+    int minY = 999999;
     std::unordered_map<std::string, int> mapCoord;
-    for (std::shared_ptr<Node> node : g.nodes) {
+    for (std::shared_ptr<Node> &node : g.nodes) {
         maxX = std::max(maxX, node->x);
         maxY = std::max(maxY, node->y);
         minX = std::min(minX, node->x);
@@ -72,25 +72,26 @@ int Algorithm::scoreCoordinate() {
             mapCoord[pair]++;
         }
     }
-    int score = 0;
+    long score = 0;
     for (std::pair<std::string, int> value : mapCoord) {
         score += 3 * std::pow(value.second - 1, 2);
     }
 
     maxX = std::abs(minX) + maxX;
     maxY = std::abs(minY) + maxY;
-    int max = std::max(maxX, maxY);
+    long max = std::max(maxX, maxY);
     return score + (max * max);
 }
 
 
-int Algorithm::scoreDistance() {
-    int score = 0;
+long Algorithm::scoreDistance() {
+    long score = 0;
 
     for (const std::shared_ptr<Edge> &edge : g.edges) {
-        score += 2 * std::pow(edge->distance() - 1, 2);
+        long temp = edge->distance();
+        score += 2l * std::pow(temp - 1, 2);
         if (edge->src->x == edge->dest->x && edge->dest->y == edge->src->y)
-            score = +99999;
+            score += 99999999;
     }
     return score;
 }
@@ -154,9 +155,21 @@ void Algorithm::displayMatriceWithValue() {
     }
 }
 
+bool replace(std::string &str, const std::string &from, const std::string &to) {
+    size_t start_pos = str.find(from);
+    if (start_pos == std::string::npos)
+        return false;
+    str.replace(start_pos, from.length(), to);
+    return true;
+}
+
 void Algorithm::output() {
+    sort(g.nodes.begin(), g.nodes.end(), [](const std::shared_ptr<Node> &lhs, const std::shared_ptr<Node> &rhs) {
+        return lhs->value < rhs->value;
+    });
     std::ofstream myfile;
-    myfile.open(file + ".output", std::ofstream::out | std::ofstream::trunc);
+    replace(file, "txt", "ans");
+    myfile.open(file, std::ofstream::out | std::ofstream::trunc);
     for (std::shared_ptr<Node> &node : g.nodes) {
         myfile << node->x << " " << node->y << std::endl;
     }

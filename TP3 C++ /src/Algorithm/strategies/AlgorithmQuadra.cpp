@@ -7,7 +7,7 @@
 
 AlgorithmQuadra::AlgorithmQuadra(const std::string &file) : Algorithm(file) {}
 
-int AlgorithmQuadra::run() {
+long AlgorithmQuadra::run() {
 
     for (std::shared_ptr<Node> &node : g.nodes) {
         node->x = 0;
