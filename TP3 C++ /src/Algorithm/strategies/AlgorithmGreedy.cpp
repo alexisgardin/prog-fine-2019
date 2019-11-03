@@ -20,19 +20,26 @@ long AlgorithmGreedy::run() {
     this->setCoordinates(node, 0, 0);
     this->evaluateNode(node);
 
+    int i = -1;
     for (const auto &n : this->g.nodes) {
+        i++;
+        if (n == nullptr) {
+            continue;
+        }
         if (n->hasCoordinates()) {
             this->evaluateNode(n);
         }
     }
 
     for (const auto &n : this->g.nodes) {
+        if (n == nullptr) continue;
         if (!n->hasCoordinates()) {
             auto coord = this->findNearestCoordinates(0, 0, n, true);
             this->setCoordinates(n, coord.first, coord.second);
         }
     }
 
+    this->movedAllPointsToPositive();
     return score();
 }
 

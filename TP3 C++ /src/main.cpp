@@ -19,7 +19,7 @@ std::vector<std::string> list_dir(std::string path) {
         return files;
     }
     while ((entry = readdir(dir)) != NULL) {
-        std::size_t found = std::string(entry->d_name).find(".txt");
+        std::size_t found = std::string(entry->d_name).find(".in");
         if (found != std::string::npos && std::string(entry->d_name).find("output") == std::string::npos)
             files.push_back(path + "/" + entry->d_name);
     }
@@ -42,7 +42,7 @@ int main() //Driver Function for Dijkstra SSSP
         myfile.open("TABU_ALGO.csv", std::ofstream::out | std::ofstream::trunc);
         myfile << "FILE,AVG,MIN,MAX,TIME";
         for (int i = 0; i < it; ++i) {
-            AlgorithmTabu a(file);
+            AlgorithmGreedy a(file);
             auto start = std::chrono::high_resolution_clock::now();
             int score = a.run();
             if (DEBUG) {

@@ -29,9 +29,9 @@ def score(NV, EDGES, COORD):
 
 if __name__ == '__main__':
 
-    for name in os.listdir("./files"):
-        if ".txt" in name:
-            f = open("./files/" + name)
+    for name in os.listdir("./output"):
+        if ".in" in name:
+            f = open("./output/" + name)
             NV = 0
             EDGES = []
             for line in f:
@@ -40,7 +40,7 @@ if __name__ == '__main__':
                 else:
                     EDGES.append(tuple([int(x) for x in line.split()]))
                     COORD = []
-            name = "./files/" + name.replace(".txt", ".ans")
+            name = "./output/" + name.replace(".in", ".ans")
             f = open(name)
             for line in f:
                 COORD.append(tuple([int(x) for x in line.split()]))

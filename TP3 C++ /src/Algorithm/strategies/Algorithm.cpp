@@ -61,6 +61,8 @@ long Algorithm::scoreCoordinate() {
     int minY = 999999;
     std::unordered_map<std::string, int> mapCoord;
     for (std::shared_ptr<Node> &node : g.nodes) {
+        if (node == nullptr) continue;
+
         maxX = std::max(maxX, node->x);
         maxY = std::max(maxY, node->y);
         minX = std::min(minX, node->x);
@@ -101,6 +103,8 @@ void Algorithm::movedAllPointsToPositive() {
     int minX = 999999, minY = 999999;
 
     for (auto &node : g.nodes) {
+        if (node == nullptr) continue;
+
         if (node->x < minX) {
             minX = node->x;
         }
@@ -112,6 +116,8 @@ void Algorithm::movedAllPointsToPositive() {
 
     int x = std::abs(minX), y = std::abs(minY);
     for (auto &node : g.nodes) {
+        if (node == nullptr) continue;
+
         node->x += x;
         node->y += y;
     }
@@ -122,6 +128,7 @@ void Algorithm::displayMatrice() {
     matrix<int> m(g.nodes.size(), g.nodes.size(), 0);
 
     for (const std::shared_ptr<Node> &node : g.nodes) {
+        if (node == nullptr) continue;
         //std::cout << node->x << ", " << node->y << std::endl;
         m(node->x, node->y) += 1;
     }
@@ -142,6 +149,8 @@ void Algorithm::displayMatriceWithValue() {
     matrix<int> m(g.nodes.size(), g.nodes.size(), 0);
 
     for (std::shared_ptr<Node> &node : g.nodes) {
+        if (node == nullptr) continue;
+
         // std::cout << node->x << ", " << node->y << std::endl;
         m(node->x, node->y) = node->value;
     }
@@ -165,13 +174,17 @@ bool replace(std::string &str, const std::string &from, const std::string &to) {
 
 void Algorithm::output() {
     sort(g.nodes.begin(), g.nodes.end(), [](const std::shared_ptr<Node> &lhs, const std::shared_ptr<Node> &rhs) {
-        return lhs->value < rhs->value;
+        return lhs != nullptr && rhs != nullptr && lhs->value < rhs->value;
     });
     std::ofstream myfile;
-    replace(file, "txt", "ans");
+    replace(file, "in", "ans");
     myfile.open(file, std::ofstream::out | std::ofstream::trunc);
     for (std::shared_ptr<Node> &node : g.nodes) {
-        myfile << node->x << " " << node->y << std::endl;
+        if (node == nullptr) {
+            myfile << g.nodes[0]->x << " " << g.nodes[0]->y << std::endl;
+        } else {
+            myfile << node->x << " " << node->y << std::endl;
+        }
     }
     myfile.close();
 
